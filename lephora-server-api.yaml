@@ -1,0 +1,20 @@
+openapi: 3.0.3
+info:
+  title: Lephora Server Api
+  description: Lephora Server Api
+  version: 0.0.1
+servers:
+  - url: 'http://lephora'
+
+paths:
+  /health:
+    get:
+      operationId: 'health_check'
+      responses:
+        '200':
+          description: 'healthy'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: 'healthy'
