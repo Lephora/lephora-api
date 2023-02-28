@@ -1,0 +1,18 @@
+---
+
+kind: pipeline
+type: docker
+name: dev-pipeline
+
+trigger:
+  branch:
+    - main
+  event:
+    - push
+
+steps:
+  - name: validate_spec
+    image: scratch
+    commands:
+      - chmod +x ./openapi-validator
+      - ./openapi-validator lephora-server-api.yaml
