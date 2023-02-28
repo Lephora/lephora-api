@@ -7,12 +7,13 @@ lephora商城后端api定义
 配置hook
 ```shell
 chmod -R +x .githooks
+chmod +x validate
 git config core.hooksPath .githooks
 ```
 
 执行openapi定义检查
 ```shell
-./openapi-validator lephora-server-api.yaml
+./validate lephora-server-api.yaml
 ```
 
 

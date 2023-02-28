@@ -1,18 +1,12 @@
----
-
 kind: pipeline
 type: docker
-name: dev-pipeline
-
+name: default
 trigger:
   branch:
     - main
-  event:
-    - push
-
 steps:
   - name: validate_spec
-    image: scratch
+    image: alpine:3.17.2
     commands:
-      - chmod +x ./openapi-validator
-      - ./openapi-validator lephora-server-api.yaml
+      - 'chmod +x ./ci-validate'
+      - './ci-validate lephora-server-api.yaml'

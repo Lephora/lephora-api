@@ -1,7 +1,7 @@
 #!/bin/sh
 
 git stash -q --keep-index
-./openapi-validator lephora-server-api.yaml
+./validate lephora-server-api.yaml
 RESULT=$?
 git stash pop -q
 exit $RESULT
