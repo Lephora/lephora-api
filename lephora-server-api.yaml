@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Lephora Server Api
   description: Lephora Server Api
-  version: 0.0.1
+  version: 0.0.2
 servers:
   - url: 'http://lephora'
 paths:
@@ -17,3 +17,71 @@ paths:
               schema:
                 type: string
                 example: 'healthy'
+  /commodity/{sku}:
+    get:
+      parameters:
+        - name: sku
+          required: true
+          schema:
+            type: string
+            example: '000001'
+          description: 'commodity primary key'
+          in: path
+      operationId: 'query_commodity_detail'
+      responses:
+        '200':
+          description: 'commodity detail'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Commodity'
+components:
+  schemas:
+    Commodity:
+      description: 'commodity information'
+      type: object
+      properties:
+        title:
+          description: 'commodity title'
+          type: string
+          example: 'vmware'
+        price:
+          $ref: '#/components/schemas/Price'
+        images:
+          description: 'commodity images url'
+          type: array
+          items:
+            $ref: '#/components/schemas/Image'
+        description:
+          description: 'commodity images description'
+          type: string
+          example: 'Im a vmware from openapi'
+      required:
+        - title
+        - price
+    Image:
+      type: object
+      properties:
+        url:
+          type: string
+          example: 'https://thoughtworks.okta.com/fs/bco/1/fs01mng2b3qwVhCW70h8'
+        alternateText:
+          type: string
+          example: 'This is picture of VxRail'
+      required:
+        - url
+    Price:
+      type: object
+      properties:
+        amount:
+          example: 23.5
+          type: number
+        unit:
+          example: 'RMB'
+          enum:
+            - RMB
+            - DOLLAR
+            - STERLING
+      required:
+        - amount
+        - unit
